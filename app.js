@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 var helloRouter = require('./routes/hello');    // ADD_20250510
 //var notesRouter = require('./routes/notes');    // ADD_20250517  // ※notes.jsでURLを養生しているため一時的にコメントアウトしとく
 var catRouter   = require('./routes/cat');      // ADD_20250531
+var yes_noRouter = require('./routes/yes_no');      // ADD_20250601
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/users', usersRouter);
 app.use('/hello', helloRouter);   // ADD_20250510
 //app.use('/notes', notesRouter);   // ADD_20250517  // ※notes.jsでURLを養生しているため一時的にコメントアウトしとく
 app.use('/cat', catRouter);       // ADD_20250531
+app.use('/yes_no', yes_noRouter); // ADD_20250601
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
