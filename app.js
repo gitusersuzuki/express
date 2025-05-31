@@ -7,7 +7,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var helloRouter = require('./routes/hello');    // ADD_20250510
-var notesRouter = require('./routes/notes');    // ADD_20250517
+//var notesRouter = require('./routes/notes');    // ADD_20250517  // ※notes.jsでURLを養生しているため一時的にコメントアウトしとく
+var catRouter   = require('./routes/cat');      // ADD_20250531
 
 var app = express();
 
@@ -24,7 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/hello', helloRouter);   // ADD_20250510
-app.use('/notes', notesRouter);   // ADD_20250517
+//app.use('/notes', notesRouter);   // ADD_20250517  // ※notes.jsでURLを養生しているため一時的にコメントアウトしとく
+app.use('/cat', catRouter);       // ADD_20250531
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
