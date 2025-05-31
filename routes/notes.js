@@ -1,30 +1,21 @@
 var express = require('express');
 var router = express.Router();
-// ƒŒƒXƒ|ƒ“ƒX‚Ìƒf[ƒ^iƒm[ƒg‘SŒj
-const responseObjectDataAll = {
-    textObject1 : {
-        id: 1,
-        title: 'ƒm[ƒg‚P‚Ìƒ^ƒCƒgƒ‹‚Å‚·',
-        subTitle: 'ƒm[ƒg‚P‚ÌƒTƒuƒ^ƒCƒgƒ‹‚Å‚·',
-        bodyText: 'ƒm[ƒg‚P‚Ì–{•¶‚Å‚·'
-    },
 
-    textObject2 : {
-        id: 2,
-        title: 'ƒm[ƒg‚Q‚Ìƒ^ƒCƒgƒ‹‚Å‚·',
-        subTitle: 'ƒm[ƒg‚Q‚ÌƒTƒuƒ^ƒCƒgƒ‹‚Å‚·',
-        bodyText: 'ƒm[ƒg‚Q‚Ì–{•¶‚Å‚·'
-    },
-};
-/**
-* ƒƒ‚‚ğ‘SŒæ“¾‚·‚éAPI
-* @returns {Object[]} data
-* @returns {number} data.id - ID
-* @returns {string} data.title - ƒ^ƒCƒgƒ‹
-* @returns {string} data.text - “à—e
-*/
-router.get('/', function (req, res, next) {
-// ‘SŒæ“¾‚µ‚Ä•Ô‚·
-    res.json(responseObjectDataAll);
+
+// æ¥ç¶šæƒ…å ±ã‚’è¨­å®š
+const { MongoClient } = require("mongodb");
+const uri = "**********";
+const client = new MongoClient(uri);
+
+router.get('/', async (req, res) => {
+// ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã€ã‚³ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã‚’æŒ‡å®š
+const database = client.db('notes');
+const notes = database.collection('notes');
+
+// idãŒï¼‘ã®ãƒ‰ã‚­ãƒ¥ãƒ¡ãƒ³ãƒˆã‚’å–å¾—
+const query = { id: 1 };
+const note = await notes.findOne(query);
+res.json(note);
 })
+
 module.exports = router;
